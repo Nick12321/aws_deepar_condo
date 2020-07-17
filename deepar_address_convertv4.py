@@ -216,7 +216,7 @@ for index, row in duplicate_data.iterrows():
             current = datetime(year, month, 1)
     
            
-            f.write('{"start": '+'"'+str(row2['DATE'])+ '", '+ '"target": ['+ str(row2['PRICE'])+', ')
+            f.write('{"start": '+'"'+str(row2['DATE'])+ '", '+ '"target": ['+ str(row2['PRICE'])+',')
             
             month = ((month + 1) % 12) or 12
             if month == 1:
@@ -237,7 +237,7 @@ for index, row in duplicate_data.iterrows():
                 else:
             
                     if month == group_date.month and year == group_date.year:
-                        f.write(str(row['PRICE'])+', ')
+                        f.write(' '+str(row['PRICE'])+',')
                         
                         month = ((month + 1) % 12) or 12
                         if month == 1:
@@ -245,7 +245,7 @@ for index, row in duplicate_data.iterrows():
                         break;
                         
                     else:
-                        f.write('"NaN",')
+                        f.write(' "NaN",')
                 
                 month = ((month + 1) % 12) or 12
                 if month == 1:
@@ -258,14 +258,14 @@ for index, row in duplicate_data.iterrows():
         if current.month == end_date.month and current.year == end_date.year:
             break
         else:
-            f.write('"NaN",')
+            f.write(' "NaN",')
             month = ((month + 1) % 12) or 12
             if month == 1:
                 year += 1
     
-    f.write('"NaN"') # last one
+    f.write(' "NaN"') # last one
     f.write('], '+'"cat": '+str(row['Codes']) + ',')
-    f.write('"dynamic_feat": ' + '[['+str(row['SQFT'])+',' + str(row['BEDS']))
+    f.write(' "dynamic_feat": ' + '[['+str(row['SQFT'])+',' + str(row['BEDS']))
     f.write(', '+str(row['BATH'])+', '+str(row['PARK'])+', '+ str(row['UNIT#'])+']]}\n')
     
 
@@ -301,12 +301,12 @@ for index, row in data.iterrows():
         if current.month == end_date.month and current.year == end_date.year:
             break
         else:
-            f.write('"NaN",')
+            f.write(' "NaN",')
             month = ((month + 1) % 12) or 12
             if month == 1:
                 year += 1
     
-    f.write('"NaN"') # last one
+    f.write(' "NaN"') # last one
     f.write('], '+'"cat": '+'['+str(row['Codes'])+']' + ',')
     f.write('"dynamic_feat": ' + '[['+str(row['SQFT'])+',' + str(row['BEDS']))
     f.write(', '+str(row['BATH'])+', '+str(row['PARK'])+', '+ str(row['UNIT#'])+']]}\n')
