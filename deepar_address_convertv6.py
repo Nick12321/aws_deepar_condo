@@ -11,7 +11,7 @@ import numpy as np
  
 from sys import platform
  
-data=pd.read_excel("condo_data.xlsx")
+data=pd.read_excel("condo_data_v2.xlsx")
 
  
 #if platform == "linux" or platform == "linux2":
@@ -25,19 +25,19 @@ print(data.head())
 #remove all rows where price is less than $400,000
 data=data[data["PRICE"]>400000].reset_index(drop=True)
 
-#remove all rows where unit # is missing
-#data=data[data["PRICE"]>400000].reset_index(drop=True)
-data['UNIT#'].replace('', np.nan, inplace=True)
+
 
 print(data.head())
+print('------------------------------')
  
- 
-#print('-------------')
 #Changing unit numbers to be integer
 for i in range(0,len(data['UNIT#'])):
      cell = str(data.at[i,'UNIT#'])
      cell = cell.upper()
      # print(cell)
+     index=cell.find(" ")
+     if index>=0:
+         cell='NaN'
      index=cell.find("PH")
      if index>=0:
          cell=cell[0:index]+"999"+cell[index+2:]

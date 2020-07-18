@@ -26,11 +26,13 @@ print(data.head())
 data=data[data["PRICE"]>400000].reset_index(drop=True)
 
 #remove all rows where unit # is missing
-#data=data[data["PRICE"]>400000].reset_index(drop=True)
-data['UNIT#'].replace('', np.nan, inplace=True)
 
+data['UNIT#'].replace('', np.nan, inplace=True)
+data=data[data["UNIT#"]=='NaN'].reset_index(drop=True)
+
+#data.dropna(subset=['UNIT#'], inplace=True)
 print(data.head())
- 
+print('------------------------------')
  
 #print('-------------')
 #Changing unit numbers to be integer
